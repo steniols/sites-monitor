@@ -12,7 +12,7 @@ class EndpointController extends Controller
 {
     public function index(string $siteId)
     {
-        $site = Site::with('endpoints')->find($siteId);
+        $site = Site::with('endpoints.check')->find($siteId);
 
         if(!$site) {
             return back();

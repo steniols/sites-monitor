@@ -23,7 +23,6 @@ class SiteController extends Controller
 
     public function store(StoreUpdateSiteRequest $request)
     {
-        //$user = Auth::user();
         $user = auth()->user();
         $user->sites()->create($request->all());
 

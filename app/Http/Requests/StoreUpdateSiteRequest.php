@@ -30,7 +30,7 @@ class StoreUpdateSiteRequest extends FormRequest
                 'max:255',
                 Rule::unique('sites')
                     ->where('user_id', Auth::user()->id)
-                    ->ignore($this->site->id) // param from url
+                    // ->ignore($this->site->id) // param from url
             ]
         ];
     }
