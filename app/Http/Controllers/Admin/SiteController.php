@@ -23,8 +23,7 @@ class SiteController extends Controller
 
     public function store(StoreUpdateSiteRequest $request)
     {
-        $user = auth()->user();
-        $user->sites()->create($request->all());
+        $request->user->sites()->create($request->all());
 
         return redirect()
                 ->route('sites.index')

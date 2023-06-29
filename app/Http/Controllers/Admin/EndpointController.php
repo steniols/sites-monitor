@@ -18,6 +18,11 @@ class EndpointController extends Controller
             return back();
         }
 
+        $this->authorize('owner', $site);
+        // if (Gate::denies('owner', $site)) {
+        //     return back();
+        // }
+
         $endpoints = $site->endpoints;
 
         return view('admin/endpoints/index', compact('site', 'endpoints'));
@@ -31,11 +36,15 @@ class EndpointController extends Controller
             return back();
         }
 
+        $this->authorize('owner', $site);
+
         return view('admin/endpoints/create', compact('site'));
     }
 
     public function store(StoreUpdateEndpointRequest $request, Site $site)
     {
+        $this->authorize('owner', $site);
+
         $site->endpoints()->create($request->all());        
 
         return redirect()
@@ -45,11 +54,15 @@ class EndpointController extends Controller
 
     public function edit(Site $site, Endpoint $endpoint)
     {
+        $this->authorize('owner', $site);
+
         return view('admin/endpoints/edit', compact('site', 'endpoint'));
     }
 
     public function update(StoreUpdateEndpointRequest $request, Site $site, Endpoint $endpoint)
     {
+        $this->authorize('owner', $site);
+
         $endpoint->update($request->validated());
 
         return redirect()
@@ -59,6 +72,8 @@ class EndpointController extends Controller
 
     public function destroy(Site $site, Endpoint $endpoint)
     {
+        $this->authorize('owner', $site);
+
         $endpoint->delete();
 
         return redirect()

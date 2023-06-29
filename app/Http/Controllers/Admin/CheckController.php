@@ -10,7 +10,7 @@ class CheckController extends Controller
 {
     public function index(Endpoint $endpoint)
     {
-        // $this->authorize('ownerChecks', $endpoint);
+        $this->authorize('ownerChecks', $endpoint);
 
         $checks = $endpoint->checks()->paginate();
 
